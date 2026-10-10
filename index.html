@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chintu — The Autonomous Sovereign AI Agent</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        :root {
+            --primary-orange: #FF7A00;
+            --primary-orange-light: #FF9E2C;
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.18);
+            --glass-blur: blur(24px) saturate(180%);
+        }
+        body {
+            background-color: #050608;
+            color: #ffffff;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            overflow-x: hidden;
+        }
+        #webgl-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 28px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+        .glass-pill {
+            background: rgba(255, 122, 0, 0.12);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 122, 0, 0.35);
+            border-radius: 9999px;
+        }
+        .text-glow {
+            text-shadow: 0 0 30px rgba(255, 122, 0, 0.5);
+        }
+        .btn-orange {
+            background: linear-gradient(135deg, #FF7A00 0%, #FF9E2C 100%);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 25px rgba(255, 122, 0, 0.4);
+        }
+        .btn-orange:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(255, 122, 0, 0.6);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050608;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 122, 0, 0.5);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FF7A00;
+        }
+    </style>
+</head>
+<body class="selection:bg-orange-500 selection:text-white">
+
+    <!-- WebGL 3D Rubik's Cube Background -->
+    <div id="webgl-container"></div>
+
+    <!-- Header & Navigation -->
+    <header class="fixed top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-7xl z-50">
+        <nav class="glass-card px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-orange-600 to-amber-400 flex items-center justify-center shadow-lg shadow-orange-500/30 text-white font-black text-xl">
+                    C
+                </div>
+                <span class="font-bold text-xl tracking-wider text-white">CHINTU<span class="text-orange-500">.</span></span>
+            </div>
+            <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-neutral-300">
+                <a href="#capabilities" class="hover:text-orange-400 transition-colors">Capabilities</a>
+                <a href="#architecture" class="hover:text-orange-400 transition-colors">Architecture</a>
+                <a href="#comparison" class="hover:text-orange-400 transition-colors">Comparison</a>
+                <a href="#roadmap" class="hover:text-orange-400 transition-colors">Roadmap</a>
+            </div>
+            <div>
+                <a href="#deploy" onclick="alert('Initiating Sovereign Agent Deployment Protocol... Connecting via Composio & Supabase.')" class="btn-orange px-5 py-2.5 rounded-full text-sm font-semibold text-white inline-flex items-center space-x-2">
+                    <span>Deploy Agent</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="relative z-10 max-w-7xl mx-auto px-6 pt-36 pb-24 space-y-36">
+
+        <!-- Hero Section -->
+        <section class="min-h-[80vh] flex flex-col justify-center items-center text-center space-y-8">
+            <div class="glass-pill px-4 py-1.5 inline-flex items-center space-x-2 text-xs md:text-sm font-medium text-orange-400">
+                <span class="w-2 h-2 rounded-full bg-orange-500 animate-ping"></span>
+                <span>Autonomous Sovereign AI Agent • Live Engine v3.8</span>
+            </div>
+
+            <h1 class="text-4xl md:text-7xl font-black tracking-tight max-w-4xl leading-tight">
+                Where Autonomous Agency Meets <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-300 to-orange-500 text-glow">Sovereign Execution.</span>
+            </h1>
+
+            <p class="text-base md:text-xl text-neutral-300 max-w-2xl leading-relaxed">
+                Not just a chat interface. A self-healing, multi-tier orchestrated AI engineer operating continuously with persistent relational memory, E2B cloud microVMs, and auto-deploy pipelines.
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-4 pt-4">
+                <a href="#capabilities" class="btn-orange px-8 py-4 rounded-2xl font-bold text-white text-base inline-flex items-center space-x-3">
+                    <span>Explore Capabilities</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                </a>
+                <a href="#architecture" class="glass-card px-8 py-4 rounded-2xl font-semibold text-white text-base hover:bg-white/10 transition-colors">
+                    View Architecture
+                </a>
+            </div>
+
+            <!-- Quick Stat Badges -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-12 w-full max-w-4xl">
+                <div class="glass-card p-5 text-left space-y-1">
+                    <div class="text-orange-400 font-bold text-lg">8-Tier Cascade</div>
+                    <div class="text-xs text-neutral-400">Zero-Downtime Autonomous Pipeline</div>
+                </div>
+                <div class="glass-card p-5 text-left space-y-1">
+                    <div class="text-orange-400 font-bold text-lg">E2B Sandboxes</div>
+                    <div class="text-xs text-neutral-400">Isolated Cloud MicroVM Execution</div>
+                </div>
+                <div class="glass-card p-5 text-left space-y-1">
+                    <div class="text-orange-400 font-bold text-lg">Supabase Memory</div>
+                    <div class="text-xs text-neutral-400">Persistent Relational & Vector Recall</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Capabilities Grid -->
+        <section id="capabilities" class="space-y-12">
+            <div class="text-center space-y-3">
+                <h2 class="text-3xl md:text-5xl font-black">Core Capabilities</h2>
+                <p class="text-neutral-400 max-w-xl mx-auto">Engineered for autonomous end-to-end execution without manual hand-holding.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Capability 1 -->
+                <div class="glass-card p-8 space-y-5 hover:border-orange-500/50 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center text-orange-400 group-hover:scale-110 transition-transform">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold">Self-Healing Code Pipeline</h3>
+                    <p class="text-neutral-300 text-sm leading-relaxed">
+                        Llama 3.3 offline code auditing meets microVM compilation and automated GitHub commits. Errors are diagnosed, patched, and verified automatically.
+                    </p>
+                </div>
+
+                <!-- Capability 2 -->
+                <div class="glass-card p-8 space-y-5 hover:border-orange-500/50 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center text-orange-400 group-hover:scale-110 transition-transform">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold">Autonomous Cloud VMs</h3>
+                    <p class="text-neutral-300 text-sm leading-relaxed">
+                        Execute Python scripts, run test suites, and compile full-stack applications in isolated E2B cloud microVMs without risking host container stability.
+                    </p>
+                </div>
+
+                <!-- Capability 3 -->
+                <div class="glass-card p-8 space-y-5 hover:border-orange-500/50 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center text-orange-400 group-hover:scale-110 transition-transform">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold">Omnichannel Toolchain</h3>
+                    <p class="text-neutral-300 text-sm leading-relaxed">
+                        Multi-platform outreach, DuckDuckGo real-time scraping, Composio API integrations across 1000+ apps, and recurring APScheduler cron automations.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Architecture Section -->
+        <section id="architecture" class="space-y-12">
+            <div class="text-center space-y-3">
+                <h2 class="text-3xl md:text-5xl font-black">Hierarchical Multi-Agent Architecture</h2>
+                <p class="text-neutral-400 max-w-xl mx-auto">Manager-Worker-Auditor topology ensuring 99.9% task success rate.</p>
+            </div>
+
+            <div class="glass-card p-8 md:p-12 space-y-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="space-y-3">
+                        <div class="text-orange-400 font-mono text-sm tracking-wider">01 / ORCHESTRATOR</div>
+                        <h4 class="text-xl font-bold">Lead Orchestrator (Chintu)</h4>
+                        <p class="text-neutral-300 text-sm">Directs overall project scopes, dispatches workers, enforces recursion limits, and maintains supreme control.</p>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="text-orange-400 font-mono text-sm tracking-wider">02 / WORKERS</div>
+                        <h4 class="text-xl font-bold">Specialized Worker Agents</h4>
+                        <p class="text-neutral-300 text-sm">Persistent worker instances in Supabase registry specialized in frontend engineering, lead scouting, and code generation.</p>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="text-orange-400 font-mono text-sm tracking-wider">03 / AUDITORS</div>
+                        <h4 class="text-xl font-bold">Dual-Stage Code Auditors</h4>
+                        <p class="text-neutral-300 text-sm">Llama 3.3 offline code repair combined with architectural validation before any sandbox execution or GitHub commit.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Chintu Beats Other AI Agents -->
+        <section id="comparison" class="space-y-12">
+            <div class="text-center space-y-3">
+                <h2 class="text-3xl md:text-5xl font-black">Why Chintu Beats Standard Wrappers</h2>
+                <p class="text-neutral-400 max-w-xl mx-auto">Comparing sovereign execution against traditional single-endpoint chat bots.</p>
+            </div>
+
+            <div class="glass-card overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="border-b border-white/10 text-neutral-400 text-sm font-semibold">
+                            <th class="p-6">Feature / Capability</th>
+                            <th class="p-6 text-orange-400">Chintu Sovereign Agent</th>
+                            <th class="p-6 text-neutral-500">Standard GPT / Claude Wrappers</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-white/10 text-sm">
+                        <tr>
+                            <td class="p-6 font-medium">Model Resilience</td>
+                            <td class="p-6 text-orange-300">Multi-tier dynamic model cascade</td>
+                            <td class="p-6 text-neutral-400">Single endpoint crash & timeout</td>
+                        </tr>
+                        <tr>
+                            <td class="p-6 font-medium">Host Security</td>
+                            <td class="p-6 text-orange-300">Isolated E2B cloud microVMs</td>
+                            <td class="p-6 text-neutral-400">Unsafe local script execution</td>
+                        </tr>
+                        <tr>
+                            <td class="p-6 font-medium">Persistence</td>
+                            <td class="p-6 text-orange-300">Long-term Supabase relational memory</td>
+                            <td class="p-6 text-neutral-400">Session-only memory loss</td>
+                        </tr>
+                        <tr>
+                            <td class="p-6 font-medium">Reliability</td>
+                            <td class="p-6 text-orange-300">Dual-stage Llama/Gemini self-healing</td>
+                            <td class="p-6 text-neutral-400">Manual human bug fixing required</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Future Roadmap & Horizon -->
+        <section id="roadmap" class="space-y-12">
+            <div class="text-center space-y-3">
+                <h2 class="text-3xl md:text-5xl font-black">Future Roadmap & Horizon</h2>
+                <p class="text-neutral-400 max-w-xl mx-auto">Continuous evolution towards autonomous enterprise engineering.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card p-8 space-y-4">
+                    <div class="text-orange-400 font-mono text-sm">PHASE IV</div>
+                    <h3 class="text-xl font-bold">Voice & Live Agents</h3>
+                    <p class="text-neutral-300 text-sm">Bidirectional real-time voice agent integration for natural spoken project direction and live debugging sessions.</p>
+                </div>
+                <div class="glass-card p-8 space-y-4">
+                    <div class="text-orange-400 font-mono text-sm">PHASE V</div>
+                    <h3 class="text-xl font-bold">Multi-Repo Swarms</h3>
+                    <p class="text-neutral-300 text-sm">Coordinated squads of autonomous agents collaborating across dozens of separate GitHub repositories simultaneously.</p>
+                </div>
+                <div class="glass-card p-8 space-y-4">
+                    <div class="text-orange-400 font-mono text-sm">PHASE VI</div>
+                    <h3 class="text-xl font-bold">SaaS Autopilot</h3>
+                    <p class="text-neutral-300 text-sm">End-to-end browser agents handling customer support tickets, PR reviews, and autonomous SaaS infrastructure maintenance.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer CTA -->
+        <section id="deploy" class="glass-card p-12 text-center space-y-8 relative overflow-hidden">
+            <div class="absolute -right-20 -top-20 w-80 h-80 bg-orange-500/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -left-20 -bottom-20 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <h2 class="text-3xl md:text-5xl font-black tracking-tight">Ready to Deploy Chintu?</h2>
+            <p class="text-neutral-300 max-w-xl mx-auto">
+                Transform your development workflow with an autonomous sovereign AI engineer that never sleeps.
+            </p>
+            <div>
+                <a href="https://github.com/abhinabgohain60-ops/chintu-sovereign-showcase" target="_blank" class="btn-orange px-10 py-5 rounded-2xl font-bold text-white text-lg inline-flex items-center space-x-3 shadow-2xl">
+                    <span>Initialize GitHub Repository</span>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </a>
+            </div>
+            <div class="text-xs text-neutral-500 pt-4">
+                © 2025 Chintu Sovereign AI Agent. Built under HMAS Manager-Worker-Auditor Architecture.
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Three.js Rubik's Cube Animation Script -->
+    <script>
+        const container = document.getElementById('webgl-container');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(7, 6, 9);
+        camera.lookAt(0, 0, 0);
+
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(renderer.domElement);
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+        scene.add(ambientLight);
+
+        const pointLight = new THREE.PointLight(0xFF7A00, 2, 50);
+        pointLight.position.set(10, 15, 10);
+        scene.add(pointLight);
+
+        const pointLight2 = new THREE.PointLight(0x3b82f6, 1, 50);
+        pointLight2.position.set(-10, -10, -10);
+        scene.add(pointLight2);
+
+        // Rubik's Cube Group
+        const cubeGroup = new THREE.Group();
+        scene.add(cubeGroup);
+
+        const cubies = [];
+        const size = 0.92;
+        const spacing = 1.0;
+
+        // Materials: 0: Right (Orange), 1: Left (Red), 2: Top (White), 3: Bottom (Yellow), 4: Front (Blue), 5: Back (Green)
+        const colors = [0xFF7A00, 0xEF4444, 0xFFFFFF, 0xEAB308, 0x3B82F6, 0x10B981];
+        
+        for (let x = -1; x <= 1; x++) {
+            for (let y = -1; y <= 1; y++) {
+                for (let z = -1; z <= 1; z++) {
+                    const geometry = new THREE.BoxGeometry(size, size, size);
+                    
+                    const materials = colors.map(color => new THREE.MeshStandardMaterial({
+                        color: color,
+                        roughness: 0.2,
+                        metalness: 0.1
+                    }));
+
+                    const cubie = new THREE.Mesh(geometry, materials);
+                    cubie.position.set(x * spacing, y * spacing, z * spacing);
+                    
+                    cubie.userData = {
+                        ox: x * spacing,
+                        oy: y * spacing,
+                        oz: z * spacing,
+                        rx: (x * 1.5) + (y * 0.8),
+                        ry: (y * 1.2) - (z * 0.9),
+                        rz: (z * 1.1) + (x * 0.7)
+                    };
+
+                    cubeGroup.add(cubie);
+                    cubies.push(cubie);
+                }
+            }
+        }
+
+        let scrollProgress = 0;
+        window.addEventListener('scroll', () => {
+            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            scrollProgress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+        });
+
+        const clock = new THREE.Clock();
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const time = clock.getElapsedTime();
+
+            cubies.forEach(cubie => {
+                const ud = cubie.userData;
+                const factor = 1 - scrollProgress;
+                cubie.rotation.x = ud.rx * factor + Math.sin(time * 0.5 + ud.ox) * 0.05 * scrollProgress;
+                cubie.rotation.y = ud.ry * factor + Math.cos(time * 0.4 + ud.oy) * 0.05 * scrollProgress;
+                cubie.rotation.z = ud.rz * factor;
+
+                cubie.position.x = ud.ox + (Math.sin(time + ud.oz) * 0.2 * (1 - scrollProgress));
+                cubie.position.y = ud.oy + (Math.cos(time + ud.ox) * 0.2 * (1 - scrollProgress));
+                cubie.position.z = ud.oz;
+            });
+
+            cubeGroup.rotation.y = time * 0.15 + (scrollProgress * Math.PI * 2);
+            cubeGroup.rotation.x = Math.sin(time * 0.1) * 0.2 + (scrollProgress * 0.5);
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>
